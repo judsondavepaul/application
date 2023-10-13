@@ -1,8 +1,19 @@
-FROM node:14
+# Stage 1: Build the React application
+FROM node:14 AS build
+
 WORKDIR /usr/src/app
-COPY package.json .
-COPY package-lock.json .
-RUN npm install --only=production
+
+COPY package.json package-lock.json ./
+RUN npm install
 COPY . .
+
+
+# Stage 2: Create a lightweight production image
+FROM nginx:alpine
+
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
+
 EXPOSE 80
-CMD [ "npm", "start" ]
+
+CMD ["nginx", "-g", "daemon off;"]
+
