@@ -26,4 +26,4 @@ yarn-error.log*
 #ignore this
 123456
 123456.pub
-
+.gitignore
