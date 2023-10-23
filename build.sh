@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t react-frontend:v1.0 .
+docker build -t dev:1.00 .
